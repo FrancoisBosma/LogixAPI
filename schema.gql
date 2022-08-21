@@ -1,0 +1,58 @@
+# Must have v21.07 or higher
+
+
+interface Concept {
+  name: String! @id(interface: true) @search(by: [hash])
+}
+enum ConceptType {
+  Notion
+  Logix
+  Both
+}
+
+#
+#	LOGIX
+#
+union ConncectionPoolCapacity = Int | String
+type ConnectionPool {
+  id: ID!
+  name: String!
+  type: ConceptType!
+  capacity: ConncectionPoolCapacity!
+}
+type LogixLambda {
+  id: ID!
+  parentConnectionPool: ConnectionPool!
+}
+union AppliedLogixInput = LogixLambda | Logix | AppliedLogix | Notion
+type AppliedLogixConnection {
+  targetConnectionPool: ConnectionPool!
+  input: AppliedLogixInput!
+}
+type LogixSubLogixes {
+  id: ID!
+  lambdas: [LogixLambda]!
+  logixes: [AppliedLogix]!
+}
+type LogixComposition {
+  id: ID!
+  subLogixes: LogixSubLogixes!
+}
+type Logix implements Concept {
+  composition: LogixComposition
+}
+type AppliedLogix {
+  id: ID!
+  targetLogix: Logix!
+  connections: [AppliedLogixConnection]!
+}
+
+#
+#	Notion
+#
+type NotionComposition {
+  appliedLogixes: [AppliedLogix]!
+}
+type Notion implements Concept {
+  composition: NotionComposition
+}
