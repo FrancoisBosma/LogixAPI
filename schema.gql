@@ -9,16 +9,22 @@ enum ConceptType {
   Logix
   Both
 }
+type IntBox {
+  value: Int
+}
+type StringBox {
+  value: String
+}
+union IntOrString = IntBox | StringBox
 
 #
 #	LOGIX
 #
-union ConncectionPoolCapacity = Int | String
 type ConnectionPool {
   id: ID!
   name: String!
   type: ConceptType!
-  capacity: ConncectionPoolCapacity!
+  capacity: IntOrString!
 }
 type LogixLambda {
   id: ID!
