@@ -46,6 +46,7 @@ type LogixComposition {
 }
 type Logix implements Concept {
   composition: LogixComposition
+  connectionPools: [ConnectionPool]!
 }
 type AppliedLogix {
   id: ID!
