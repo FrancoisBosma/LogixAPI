@@ -21,7 +21,7 @@ type StringBox {
 #
 type ConnectionPool {
   id: ID!
-  name: String!
+  name: String! @id @search(by: [hash])
   type: ConceptType!
   capacity: String!
 }
