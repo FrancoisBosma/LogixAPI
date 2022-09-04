@@ -15,7 +15,6 @@ type IntBox {
 type StringBox {
   value: String
 }
-union IntOrString = IntBox | StringBox
 
 #
 #	LOGIX
@@ -24,7 +23,7 @@ type ConnectionPool {
   id: ID!
   name: String!
   type: ConceptType!
-  capacity: IntOrString!
+  capacity: String!
 }
 type LogixLambda {
   id: ID!
