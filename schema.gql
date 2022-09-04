@@ -21,6 +21,7 @@ type ConnectionPool {
 }
 type LogixLambda {
   id: ID!
+  name: String! @id @search(by: [hash])
   parentConnectionPool: ConnectionPool!
 }
 union AppliedLogixInput = LogixLambda | Logix | AppliedLogix | Notion
