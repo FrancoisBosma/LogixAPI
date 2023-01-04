@@ -10,3 +10,18 @@ curl "http://localhost:8080/admin" -H "Content-Type: application/json" --data-bi
 ```bash
 curl -X POST localhost:8080/admin/schema --data-binary '@schema.gql' --compressed
 ```
+
+## Export
+1) send to `http://localhost:8080//admin`
+```
+mutation {
+  export(input: { format: "json" }) {
+    response {
+      message
+      code
+    }
+  }
+}
+2) Then check /tmp/data by default
+[Doc](https://dgraph.io/docs/deploy/dgraph-administration/#export-database)
+```
