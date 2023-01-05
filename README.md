@@ -25,3 +25,6 @@ mutation {
 2) Then check /tmp/data by default
 [Doc](https://dgraph.io/docs/deploy/dgraph-administration/#export-database)
 ```
+
+## DB Upgrade
+[Doc](https://dgraph.io/docs/deploy/dgraph-administration/#upgrade-database)
