@@ -1,62 +1,26 @@
-# Must have v21.07 or higher
+type Concept {
+  name: String! @id @search(by: [hash])
+  arguments: [ConceptArgumentType]! @hasInverse(field: concept)
+  composition: ConceptComposition @hasInverse(field: concept)
+}
 
+type ConceptArgumentType {
+  id: ID!
+  name: String!
+  concept: Concept!
+  capacity: String!
+}
 
-# interface Concept {
-#   name: String! @id(interface: true) @search(by: [hash])
-# }
-# enum ConceptType {
-#   Notion
-#   Logix
-#   Both
-# }
+type ConceptComposition {
+  id: ID!
+  concept: Concept!
+  subConcepts: [Concept]!
+  connections: [SubConceptConnection]!
+}
 
-# #
-# #	LOGIX
-# #
-# type ConnectionPool {
-#   id: ID!
-#   name: String! @id @search(by: [hash])
-#   type: ConceptType!
-#   capacity: String!
-# }
-# type LogixLambda {
-#   id: ID!
-#   name: String! @id @search(by: [hash])
-#   parentConnectionPool: ConnectionPool!
-# }
-# union AppliedLogixInput = LogixLambda | Logix | AppliedLogix | Notion
-# type AppliedLogixConnection {
-#   targetConnectionPool: ConnectionPool!
-#   input: AppliedLogixInput!
-# }
-# type LogixSubLogixes {
-#   id: ID!
-#   lambdas: [LogixLambda]!
-#   logixes: [AppliedLogix]!
-# }
-# type LogixComposition {
-#   id: ID!
-#   subLogixes: LogixSubLogixes!
-# }
-# type Logix implements Concept {
-#   composition: LogixComposition
-#   connectionPools: [ConnectionPool]!
-# }
-# type AppliedLogix {
-#   id: ID!
-#   name: String! @id @search(by: [hash])
-#   targetLogix: Logix!
-#   connections: [AppliedLogixConnection]!
-# }
-
-# #
-# #	Notion
-# #
-# type NotionComposition {
-#   appliedLogixes: [AppliedLogix]!
-# }
-# type Notion implements Concept {
-#   composition: NotionComposition
-# }
-
-
+type SubConceptConnection {
+  sourceSCIndex: Int!
+  sourceSCArgumentType: ConceptArgumentType!
+  targetConceptType: String! # 'Self' | 'SC' | 'Argument'
+  targetConceptIndex: Int
+}
