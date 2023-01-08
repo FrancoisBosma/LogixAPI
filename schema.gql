@@ -15,12 +15,15 @@ type ConceptComposition {
   id: ID!
   concept: Concept!
   subConcepts: [Concept]!
-  connections: [SubConceptConnection]!
+  connections: [SubConceptConnection]! @hasInverse(field: conceptComposition)
 }
 
 type SubConceptConnection {
+  id: ID!
+  conceptComposition: ConceptComposition!
   sourceSCIndex: Int!
   sourceSCArgumentType: ConceptArgumentType!
-  targetConceptType: String! # 'Self' | 'SC' | 'Argument'
+  targetConceptType: String! # 'Self' | 'SC' | 'Argument' | 'SCArgument'
   targetConceptIndex: Int
+  targetConceptArgumentIndex: Int
 }
