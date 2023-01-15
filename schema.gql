@@ -16,6 +16,7 @@ type ConceptComposition {
   concept: Concept!
   subConcepts: [Concept]!
   connections: [SubConceptConnection]! @hasInverse(field: conceptComposition)
+  coordinates: [SubConceptCoordinates]! @hasInverse(field: conceptComposition)
 }
 
 type SubConceptConnection {
@@ -26,4 +27,12 @@ type SubConceptConnection {
   targetConceptType: String! # 'Self' | 'SC' | 'Argument' | 'SCArgument'
   targetConceptIndex: Int
   targetConceptArgumentIndex: Int
+}
+
+type SubConceptCoordinates {
+  id: ID!
+  conceptComposition: ConceptComposition!
+  sourceSCIndex: Int!
+  x: Int!
+  y: Int!
 }
