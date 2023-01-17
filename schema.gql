@@ -1,38 +1,36 @@
 type Concept {
   name: String! @id @search(by: [hash])
-  arguments: [ConceptArgumentType]! @hasInverse(field: concept)
-  composition: ConceptComposition @hasInverse(field: concept)
+  arguments: [ConceptArgumentType]! @hasInverse(field: edgeConcept)
+  composition: ConceptComposition @hasInverse(field: edgeConcept)
 }
 
 type ConceptArgumentType {
-  id: ID!
-  name: String!
-  concept: Concept!
+  name: String! @id @search(by: [hash])
+  edgeConcept: Concept!
   capacity: String!
 }
 
 type ConceptComposition {
   id: ID!
+  edgeConcept: Concept!
+  subConcepts: [SubConcept]! @hasInverse(field: edgeConceptComposition)
+  connections: [SubConceptConnection]! @hasInverse(field: edgeConceptComposition)
+}
+
+type SubConcept {
+  id: ID!
+  edgeConceptComposition: ConceptComposition!
   concept: Concept!
-  subConcepts: [Concept]!
-  connections: [SubConceptConnection]! @hasInverse(field: conceptComposition)
-  coordinates: [SubConceptCoordinates]! @hasInverse(field: conceptComposition)
+  x: Int!
+  y: Int!
 }
 
 type SubConceptConnection {
   id: ID!
-  conceptComposition: ConceptComposition!
+  edgeConceptComposition: ConceptComposition!
   sourceSCIndex: Int!
   sourceSCArgumentType: ConceptArgumentType!
   targetConceptType: String! # 'Self' | 'SC' | 'Argument' | 'SCArgument'
   targetConceptIndex: Int
-  targetConceptArgumentIndex: Int
-}
-
-type SubConceptCoordinates {
-  id: ID!
-  conceptComposition: ConceptComposition!
-  sourceSCIndex: Int!
-  x: Int!
-  y: Int!
+  targetConceptArgumentType: ConceptArgumentType
 }
