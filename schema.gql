@@ -1,36 +1,43 @@
 type Concept {
   name: String! @id @search(by: [hash])
-  arguments: [ConceptArgumentType]! @hasInverse(field: edgeConcept)
-  composition: ConceptComposition @hasInverse(field: edgeConcept)
+  arguments: [ConceptArgumentType!]! @hasInverse(field: ownerConcept)
+  composition: ConceptComposition @hasInverse(field: ownerConcept)
 }
 
 type ConceptArgumentType {
   name: String! @id @search(by: [hash])
-  edgeConcept: Concept!
+  ownerConcept: Concept!
   capacity: String!
 }
 
 type ConceptComposition {
   id: ID!
-  edgeConcept: Concept!
-  subConcepts: [SubConcept]! @hasInverse(field: edgeConceptComposition)
-  connections: [SubConceptConnection]! @hasInverse(field: edgeConceptComposition)
+  ownerConcept: Concept!
+  subConcepts: [SubConcept!]! @hasInverse(field: ownerConceptComposition)
+  connections: [SubConceptConnection!]! @hasInverse(field: ownerConceptComposition)
 }
 
 type SubConcept {
   id: ID!
-  edgeConceptComposition: ConceptComposition!
+  ownerConceptComposition: ConceptComposition!
   concept: Concept!
-  x: Int!
-  y: Int!
+  xy: String # "x:y"
+  wh: String # "w:h"
 }
 
 type SubConceptConnection {
   id: ID!
-  edgeConceptComposition: ConceptComposition!
-  sourceSCIndex: Int!
-  sourceSCArgumentType: ConceptArgumentType!
-  targetConceptType: String! # 'Self' | 'SC' | 'Argument' | 'SCArgument'
-  targetConceptIndex: Int
-  targetConceptArgumentType: ConceptArgumentType
+  ownerConceptComposition: ConceptComposition!
+  sourceXY: String!
+  sourceArgumentType: ConceptArgumentType!
+  targetConceptType: TargetConceptType!
+  targetConceptXY: String # For OtherSubConcept + OtherSubConceptArgument
+  targetConceptArgumentType: ConceptArgumentType # For OtherSubConceptArgument + OwnerArgument
+}
+
+enum TargetConceptType {
+  Self
+  OtherSubConcept
+  OtherSubConceptArgument
+  OwnerArgument
 }

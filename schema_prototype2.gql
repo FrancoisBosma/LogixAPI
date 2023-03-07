@@ -1,0 +1,36 @@
+type Concept {
+  name: String! @id @search(by: [hash])
+  arguments: [ConceptArgumentType]! @hasInverse(field: edgeConcept)
+  composition: ConceptComposition @hasInverse(field: edgeConcept)
+}
+
+type ConceptArgumentType {
+  name: String! @id @search(by: [hash])
+  edgeConcept: Concept!
+  capacity: String!
+}
+
+type ConceptComposition {
+  id: ID!
+  edgeConcept: Concept!
+  subConcepts: [SubConcept]! @hasInverse(field: edgeConceptComposition)
+  connections: [SubConceptConnection]! @hasInverse(field: edgeConceptComposition)
+}
+
+type SubConcept {
+  id: ID!
+  edgeConceptComposition: ConceptComposition!
+  concept: Concept!
+  x: Int!
+  y: Int!
+}
+
+type SubConceptConnection {
+  id: ID!
+  edgeConceptComposition: ConceptComposition!
+  sourceSCIndex: Int!
+  sourceSCArgumentType: ConceptArgumentType!
+  targetConceptType: String! # 'Self' | 'SC' | 'Argument' | 'SCArgument'
+  targetConceptIndex: Int
+  targetConceptArgumentType: ConceptArgumentType
+}
