@@ -28,10 +28,10 @@ type SubConcept {
 type SubConceptConnection {
   id: ID!
   ownerConceptComposition: ConceptComposition!
-  sourceXY: String!
+  sourceCustomID: String!
   sourceArgumentType: ConceptArgumentType!
   targetConceptType: TargetConceptType!
-  targetConceptXY: String # For OtherSubConcept + OtherSubConceptArgument
+  targetConceptCustomID: String # For OtherSubConcept + OtherSubConceptArgument
   targetConceptArgumentType: ConceptArgumentType # For OtherSubConceptArgument + OwnerArgument
 }
 
