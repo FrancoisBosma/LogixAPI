@@ -2,7 +2,6 @@ type Concept {
   name: String! @id @search(by: [hash])
   arguments: [ConceptArgumentType!]! @hasInverse(field: ownerConcept)
   composition: ConceptComposition @hasInverse(field: ownerConcept)
-  wh: String! # "w:h"
 }
 
 type ConceptArgumentType {
@@ -23,6 +22,7 @@ type SubConcept {
   ownerConceptComposition: ConceptComposition!
   concept: Concept!
   xy: String # "x:y"
+  wh: String # "w:h"
 }
 
 type SubConceptConnection {
