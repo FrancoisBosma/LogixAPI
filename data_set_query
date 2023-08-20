@@ -1,0 +1,63 @@
+mutation { addConcept(input: [ { name: "List" arguments: [{ ownerConcept: {name: "List"} name: "List.of" capacity: "infinite"
+      }]
+      wh:"150:60"
+    }, {
+      name: "Someone else" arguments: [{ ownerConcept: {name: "Someone else"} name: "Someone else.than" capacity: "infinite"
+      }]
+      wh:"150:60"
+    }, {
+      name: "Other people" arguments: [{ ownerConcept: {name: "Other people"} name: "Other people.than" capacity: "infinite"
+      }]
+      composition: { ownerConcept: {name: "Other people"} subConcepts: [{concept: {name: "List"} xy: "0:-200"}, {concept: 
+        {name: "Someone else"} xy: "0:200"}] connections: [{
+          ownerConceptComposition: {ownerConcept: {name: "Other people"}} sourceCustomID: "0:-100" sourceArgumentType: {name: 
+          "List.of"} targetConceptType: OtherSubConcept targetConceptCustomID: "0:100"
+        }, {
+          ownerConceptComposition: {ownerConcept: {name: "Other people"}} sourceCustomID: "0:100" sourceArgumentType: {name: 
+          "Someone else.than"} targetConceptType: OwnerArgument targetConceptCustomID: "Other people.than"
+        }]
+      }
+      wh:"150:60"
+    }, {
+      name: "Someone" arguments: [] wh:"150:60"
+    }, {
+      name: "Concept" arguments: [] wh:"150:60"
+    }, {
+      name: "Convey" arguments: [{ ownerConcept: {name: "Convey"} name: "Convey.from" capacity: "infinite"
+      }, {
+        ownerConcept: {name: "Convey"} name: "Convey.what" capacity: "infinite"
+      }, {
+        ownerConcept: {name: "Convey"} name: "Convey.to" capacity: "infinite"
+      }]
+      wh:"150:60"
+    }, {
+      name: "Communication" arguments: [] composition: { ownerConcept: {name: "Communication"} subConcepts: [ {concept: {name: 
+          "Convey"} xy:"0:0"}, {concept: {name: "Someone"} xy:"-200:200"}, {concept: {name: "Concept"} xy:"-200:-200"}, 
+          {concept: {name: "Other people"} xy:"200:0"},
+        ] connections: [ { ownerConceptComposition: {ownerConcept: {name: "Communication"}} sourceCustomID: "0:0" 
+            sourceArgumentType: {name: "Convey.from"} targetConceptType: OtherSubConcept targetConceptCustomID: "-100:100"
+          },
+          { ownerConceptComposition: {ownerConcept: {name: "Communication"}} sourceCustomID: "0:0" sourceArgumentType: {name: 
+            "Convey.what"} targetConceptType: OtherSubConcept targetConceptCustomID: "-100:-100"
+          },
+          { ownerConceptComposition: {ownerConcept: {name: "Communication"}} sourceCustomID: "0:0" sourceArgumentType: {name: 
+            "Convey.to"} targetConceptType: OtherSubConcept targetConceptCustomID: "100:0"
+          },
+          { ownerConceptComposition: {ownerConcept: {name: "Communication"}} sourceCustomID: "100:0" sourceArgumentType: {name: 
+            "Other people.than"} targetConceptType: OtherSubConceptArgument targetConceptCustomID: "0:0" 
+            targetConceptArgumentType: {name: "Convey.from"}
+          },
+        ]
+      }
+      wh:"150:60"
+    }
+  ]) { concept { name arguments { name capacity
+      }
+      composition { subConcepts {concept{name} xy} connections { sourceCustomID sourceArgumentType {name ownerConcept{name}} 
+          targetConceptType targetConceptCustomID targetConceptArgumentType {name}
+        }
+      }
+      wh
+    }
+  }
+}
