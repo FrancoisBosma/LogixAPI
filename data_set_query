@@ -1,5 +1,6 @@
-mutation { addConcept(input: [ { name: "List" arguments: [{ ownerConcept: {name: "List"} name: "List.of" capacity: "infinite"
-      }]
+mutation {
+  addConcept(input: [
+    { name: "List" arguments: [{ ownerConcept: {name: "List"} name: "List.of" capacity: "infinite"}]
       wh:"150:60"
     }, {
       name: "Someone else" arguments: [{ ownerConcept: {name: "Someone else"} name: "Someone else.than" capacity: "infinite"
@@ -51,7 +52,8 @@ mutation { addConcept(input: [ { name: "List" arguments: [{ ownerConcept: {name:
       }
       wh:"150:60"
     }
-  ]) { concept { name arguments { name capacity
+  ]) {
+    concept { name arguments { name capacity
       }
       composition { subConcepts {concept{name} xy} connections { sourceCustomID sourceArgumentType {name ownerConcept{name}} 
           targetConceptType targetConceptCustomID targetConceptArgumentType {name}
