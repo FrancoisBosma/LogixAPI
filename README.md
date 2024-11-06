@@ -27,4 +27,4 @@ mutation {
 ```
 
 ## DB Upgrade
-[Doc](https://dgraph.io/docs/deploy/dgraph-administration/#upgrade-database)
+[Doc](https://dgraph.io/docs/deploy/admin/dgraph-administration/#upgrade-database)

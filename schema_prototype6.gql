@@ -22,21 +22,21 @@ type SubConcept {
   id: ID!
   ownerConceptComposition: ConceptComposition!
   concept: Concept!
-  xy: String # "x:y", ought to be unique among all sub-concepts of this owner concept => can work as a sort of ID
+  xy: String # "x:y"
 }
 
 type SubConceptConnection {
   id: ID!
   ownerConceptComposition: ConceptComposition!
-  fedSubConceptKey: String! # can be a SubConcept's xy or an Argument's name
-  fedSubConceptArgumentType: ConceptArgumentType!
-  argumentFeederType: ArgumentFeederType!
-  argumentFeederKey: String # For OtherSubConcept + OtherSubConceptArgument
-  argumentFeederArgumentType: ConceptArgumentType # For OtherSubConceptArgument + OwnerArgument
+  sourceCustomID: String!
+  sourceArgumentType: ConceptArgumentType!
+  targetConceptType: TargetConceptType!
+  targetConceptCustomID: String # For OtherSubConcept + OtherSubConceptArgument
+  targetConceptArgumentType: ConceptArgumentType # For OtherSubConceptArgument + OwnerArgument
 }
 
-enum ArgumentFeederType {
-  Self # the sub-concept is its own argument
+enum TargetConceptType {
+  Self
   OtherSubConcept
   OtherSubConceptArgument
   OwnerArgument
