@@ -7,7 +7,6 @@ type Concept {
 
 type ConceptArgumentType {
   name: String! @id @search(by: [hash])
-  positionAngle: Int!
   ownerConcept: Concept!
   capacity: String!
 }
@@ -31,6 +30,7 @@ type SubConceptConnection {
   ownerConceptComposition: ConceptComposition!
   fedSubConceptKey: String! # can be a SubConcept's xy or an Argument's name
   fedSubConceptArgumentType: ConceptArgumentType!
+  fedSubConceptArgumentPositionAngle: Int!
   argumentFeederType: ArgumentFeederType!
   argumentFeederKey: String # For OtherSubConcept + OtherSubConceptArgument
   argumentFeederArgumentType: ConceptArgumentType # For OtherSubConceptArgument + OwnerArgument
