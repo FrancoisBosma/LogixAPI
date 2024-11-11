@@ -1,10 +1,10 @@
 mutation {
   addConcept(input: [
-    { name: "List" arguments: [{ ownerConcept: {name: "List"} name: "List.of" capacity: "infinite"}] wh:"150:60"},
-    { name: "Someone else" arguments: [{ ownerConcept: {name: "Someone else"} name: "Someone else.than" capacity: "infinite"}] wh:"150:60"},
+    { name: "List" arguments: [{ ownerConcept: {name: "List"} positionAngle:180 name: "List.of" capacity: "infinite"}] wh:"150:60"},
+    { name: "Someone else" arguments: [{ ownerConcept: {name: "Someone else"} positionAngle:180 name: "Someone else.than" capacity: "infinite"}] wh:"150:60"},
     {
       name: "Other people"
-      arguments: [{ ownerConcept: {name: "Other people"} name: "Other people.than" capacity: "infinite"}]
+      arguments: [{ ownerConcept: {name: "Other people"} positionAngle:180 name: "Other people.than" capacity: "infinite"}]
       composition: {
         ownerConcept: {name: "Other people"}
         subConcepts: [
@@ -46,9 +46,9 @@ mutation {
     {
       name: "Convey"
       arguments: [
-        {ownerConcept: {name: "Convey"} name: "Convey.from" capacity: "infinite"},
-        {ownerConcept: {name: "Convey"} name: "Convey.what" capacity: "infinite"},
-        {ownerConcept: {name: "Convey"} name: "Convey.to" capacity: "infinite"}
+        {ownerConcept: {name: "Convey"} positionAngle:180 name: "Convey.from" capacity: "infinite"},
+        {ownerConcept: {name: "Convey"} positionAngle:0 name: "Convey.what" capacity: "infinite"},
+        {ownerConcept: {name: "Convey"} positionAngle:90 name: "Convey.to" capacity: "infinite"}
       ]
       wh:"150:60"
     },
@@ -103,6 +103,7 @@ mutation {
       arguments {
         name
         capacity
+        positionAngle
       }
       composition {
         subConcepts {concept{name} xy}
