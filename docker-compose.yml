@@ -11,7 +11,6 @@
 
 # N.B.2: access Ratel at https://play.dgraph.io/ and plug into the running services
 
-version: "3.2"
 services:
   zero:
     image: dgraph/dgraph:latest
